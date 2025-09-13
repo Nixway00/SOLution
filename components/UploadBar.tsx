@@ -144,6 +144,58 @@ export function UploadBar({ onAnalyze, isAnalyzing }: UploadBarProps) {
         </div>
       </div>
 
+      {/* Analysis Guidelines Terminal */}
+      <div className="terminal-window rounded-lg">
+        <div className="terminal-header">
+          <div className="terminal-dot bg-red-500"></div>
+          <div className="terminal-dot bg-yellow-500"></div>
+          <div className="terminal-dot bg-green-500"></div>
+          <span className="terminal-text ml-4">analysis-guidelines.exe</span>
+        </div>
+        
+        <div className="p-6 space-y-4">
+          <div className="terminal-text">
+            <span className="cyber-text">$</span> <span className="text-code">./analysis-guidelines --optimal-chart</span>
+          </div>
+          
+          <div className="space-y-3">
+            <div className="matrix-text text-sm">[OPTIMAL_CHART_SETTINGS]</div>
+            
+            <div className="terminal-text text-sm space-y-2">
+              <div className="cyber-text">📊 Timeframe:</div>
+              <div className="ml-4">• Use 5-minute or 10-minute candlestick charts</div>
+              <div className="ml-4">• Avoid 1-minute (too noisy) or daily (too slow)</div>
+            </div>
+            
+            <div className="terminal-text text-sm space-y-2">
+              <div className="cyber-text">📈 Chart Elements:</div>
+              <div className="ml-4">• Include price action with clear support/resistance</div>
+              <div className="ml-4">• Show volume bars (essential for analysis)</div>
+              <div className="ml-4">• Display technical indicators (RSI, MACD, etc.)</div>
+            </div>
+            
+            <div className="terminal-text text-sm space-y-2">
+              <div className="cyber-text">💰 Market Data:</div>
+              <div className="ml-4">• Market cap, 24h volume, holders count</div>
+              <div className="ml-4">• Price change percentage (1h, 24h, 7d)</div>
+              <div className="ml-4">• Trading pairs and liquidity info</div>
+            </div>
+            
+            <div className="terminal-text text-sm space-y-2">
+              <div className="cyber-text">🎯 Best Results:</div>
+              <div className="ml-4">• Screenshot from TradingView, DexScreener, or CoinGecko</div>
+              <div className="ml-4">• High resolution, clear text, complete data</div>
+              <div className="ml-4">• Recent data (within last 24 hours)</div>
+            </div>
+            
+            <div className="hacker-text text-xs border-l-2 border-terminal pl-3 mt-4">
+              [WARNING] Poor quality charts may result in inaccurate signals. 
+              For best results, use professional trading platforms with complete market data.
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Upload Terminal */}
       <form onSubmit={handleSubmit} className="terminal-window rounded-lg">
         <div className="terminal-header">

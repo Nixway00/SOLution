@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
             content: [
               {
                 type: 'text',
-                text: 'Analyze this trading chart image and decide: BUY or SELL. You must respond with ONLY a valid JSON object in this exact format: {"signal":"BUY","reason":"your reason here"} or {"signal":"SELL","reason":"your reason here"}. Do not include any other text, explanations, or formatting. Just the JSON object.'
+                text: 'Analyze this cryptocurrency trading chart image and provide a BUY or SELL signal. Focus on: 1) Price action patterns and support/resistance levels, 2) Volume analysis and momentum, 3) Technical indicators (RSI, MACD, moving averages), 4) Market data (market cap, 24h volume, price changes), 5) Overall market sentiment and trend. Consider 5-10 minute timeframes optimal. You must respond with ONLY a valid JSON object in this exact format: {"signal":"BUY","reason":"your concise reason here"} or {"signal":"SELL","reason":"your concise reason here"}. Do not include any other text, explanations, or formatting. Just the JSON object.'
               },
               {
                 type: 'image_url',
