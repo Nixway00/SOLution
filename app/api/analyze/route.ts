@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+export interface AnalysisResult {
+  signal: 'BUY' | 'SELL'
+  reason: string
+}
+
 const GROQ_API_KEY = process.env.GROQ_API_KEY
 const GROQ_MODEL = process.env.GROQ_MODEL || 'meta-llama/llama-4-scout-17b-16e-instruct'
 const GROQ_BASE_URL = 'https://api.groq.com/openai/v1'
