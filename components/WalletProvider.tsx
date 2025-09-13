@@ -1,0 +1,35 @@
+'use client'
+
+import { FC, ReactNode, useMemo } from 'react'
+import { ConnectionProvider, WalletProvider as SolanaWalletProvider } from '@solana/wallet-adapter-react'
+import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets'
+import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
+
+// Default styles that can be overridden by your app
+require('@solana/wallet-adapter-react-ui/styles.css')
+
+interface WalletProviderProps {
+  children: ReactNode
+}
+
+export const WalletProvider: FC<WalletProviderProps> = ({ children }) => {
+  // Use your custom Helius RPC endpoint
+  const endpoint = useMemo(() => 'https://mainnet.helius-rpc.com/?api-key=35aca90c-9479-4f8b-8284-f9701ab0b0af', [])
+
+  const wallets = useMemo(
+    () => [
+      new PhantomWalletAdapter(),
+    ],
+    []
+  )
+
+  return (
+    <ConnectionProvider endpoint={endpoint}>
+      <SolanaWalletProvider wallets={wallets} autoConnect>
+        <WalletModalProvider>
+          {children}
+        </WalletModalProvider>
+      </SolanaWalletProvider>
+    </ConnectionProvider>
+  )
+}

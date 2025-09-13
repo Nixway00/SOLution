@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  }
+  
+  body {
+    background: #000000;
+    background-image: 
+      radial-gradient(circle at 20% 50%, #00ff41 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, #00ffff 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, #ff0080 0%, transparent 50%);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  
+  /* Matrix rain effect */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(transparent 50%, rgba(0, 255, 65, 0.03) 50%);
+    background-size: 100% 4px;
+    animation: matrix 20s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+@layer components {
+  .terminal-window {
+    @apply bg-terminal-bg/90 backdrop-blur-sm border border-terminal/30 shadow-2xl shadow-terminal/20;
+  }
+  
+  .terminal-header {
+    @apply bg-terminal/10 border-b border-terminal/30 p-3 flex items-center space-x-2;
+  }
+  
+  .terminal-dot {
+    @apply w-3 h-3 rounded-full;
+  }
+  
+  .terminal-text {
+    @apply text-terminal font-mono text-sm;
+  }
+  
+  .matrix-text {
+    @apply text-matrix font-mono font-bold;
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 40px currentColor;
+  }
+  
+  .glitch-text {
+    @apply text-glitch font-mono font-bold;
+    animation: glitch 0.3s ease-in-out infinite alternate;
+  }
+  
+  .cyber-text {
+    @apply text-cyber font-mono font-bold;
+    text-shadow: 0 0 5px currentColor;
+  }
+  
+  .hacker-text {
+    @apply text-hacker font-mono font-bold;
+  }
+  
+  .terminal-cursor {
+    @apply inline-block w-2 h-5 bg-terminal animate-terminal-blink;
+  }
+  
+  .scan-line {
+    @apply absolute inset-0 bg-gradient-to-b from-transparent via-terminal/20 to-transparent;
+    animation: scan-line 2s linear infinite;
+  }
+  
+  .hack-effect {
+    animation: hack 3s ease-in-out infinite;
+  }
+  
+  .terminal-button {
+    @apply bg-terminal/20 border border-terminal/50 text-terminal font-mono px-4 py-2 hover:bg-terminal/30 hover:border-terminal transition-all duration-200;
+  }
+  
+  .terminal-input {
+    @apply bg-transparent border border-terminal/30 text-terminal font-mono px-3 py-2 focus:border-terminal focus:outline-none;
+  }
+  
+  /* Wallet Button Override */
+  .wallet-adapter-button {
+    background: rgba(0, 255, 0, 0.2) !important;
+    border: 1px solid rgba(0, 255, 0, 0.5) !important;
+    color: #00ff00 !important;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace !important;
+    border-radius: 0.375rem !important;
+    height: 2.5rem !important;
+    padding: 0 1rem !important;
+    transition: all 0.2s !important;
+    z-index: 9999 !important;
+  }
+  
+  .wallet-adapter-button:hover {
+    background: rgba(0, 255, 0, 0.3) !important;
+    border-color: #00ff00 !important;
+  }
+  
+  .wallet-adapter-dropdown {
+    z-index: 9999 !important;
+    background: #0d1117 !important;
+    border: 1px solid rgba(0, 255, 0, 0.3) !important;
+    border-radius: 0.375rem !important;
+  }
+  
+  .wallet-adapter-dropdown-list {
+    background: #0d1117 !important;
+    border: 1px solid rgba(0, 255, 0, 0.3) !important;
+    border-radius: 0.375rem !important;
+  }
+  
+  .wallet-adapter-dropdown-list-item {
+    color: #00ff00 !important;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace !important;
+  }
+  
+  .wallet-adapter-dropdown-list-item:hover {
+    background: rgba(0, 255, 0, 0.1) !important;
+  }
+  
+  /* Custom Wallet Button Styling */
+  .wallet-adapter-button {
+    background: rgba(0, 255, 0, 0.2) !important;
+    border: 1px solid rgba(0, 255, 0, 0.5) !important;
+    color: transparent !important;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace !important;
+    border-radius: 0.375rem !important;
+    height: 3rem !important;
+    padding: 0 1.5rem !important;
+    transition: all 0.2s !important;
+    position: relative !important;
+    min-width: 200px !important;
+  }
+  
+  .wallet-adapter-button:hover {
+    background: rgba(0, 255, 0, 0.3) !important;
+    border-color: #00ff00 !important;
+  }
+  
+  /* Hide all original content */
+  .wallet-adapter-button * {
+    display: none !important;
+  }
+  
+  /* Custom text content */
+  .wallet-adapter-button::before {
+    content: 'Connect' !important;
+    color: #00ff00 !important;
+    font-weight: bold !important;
+    display: block !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    white-space: nowrap !important;
+    font-size: 1rem !important;
+  }
+  
+  .wallet-adapter-button::after {
+    content: '' !important;
+  }
+}
