@@ -33,10 +33,23 @@ export function UploadBar({ onAnalyze, isAnalyzing }: UploadBarProps) {
         return
       }
 
+      // TEMPORARY BYPASS: Allow access for testing while token propagates
+      // TODO: Remove this after token is fully deployed and accessible
+      console.log('Token address configured, checking balance...')
+      console.log('Token address:', config.solana.solutionTokenAddress)
+
       const connection = new Connection(config.solana.rpcUrl)
       const balance = await getTokenBalance(connection, publicKey, config.solana.solutionTokenAddress)
+      
+      // TEMPORARY BYPASS: Allow access for testing (remove after token is fully deployed)
+      const hasAccessForTesting = true // Set to false to enable real token gating
+      
       setTokenBalance(balance.balance)
-      setHasAccess(balance.hasAccess)
+      setHasAccess(hasAccessForTesting || balance.hasAccess)
+      
+      console.log('Token balance:', balance.balance)
+      console.log('Has access (real):', balance.hasAccess)
+      console.log('Has access (testing):', hasAccessForTesting)
     } catch (error) {
       console.error('Error checking token balance:', error)
       setTokenBalance(0)
@@ -121,17 +134,18 @@ export function UploadBar({ onAnalyze, isAnalyzing }: UploadBarProps) {
               <div className="terminal-text text-sm">SOLUTION token address not set. Please contact administrator.</div>
               <div className="terminal-text text-sm">Status: <span className="glitch-text">WAITING_FOR_CONFIG</span></div>
             </div>
-          ) : hasAccess ? (
-            <div className="space-y-2">
-              <div className="terminal-text">
-                <span className="cyber-text">$</span> <span className="text-code">./token-gate --check --wallet {publicKey?.toString().slice(0, 8)}...</span>
-              </div>
-              <div className="matrix-text text-sm">[SUCCESS] Access granted!</div>
-              <div className="terminal-text text-sm">
-                Balance: <span className="cyber-text">{formatTokenAmount(tokenBalance || 0)} $SOLUTION</span>
-              </div>
-              <div className="terminal-text text-sm">Status: <span className="matrix-text">READY_FOR_ANALYSIS</span></div>
-            </div>
+                  ) : hasAccess ? (
+                    <div className="space-y-2">
+                      <div className="terminal-text">
+                        <span className="cyber-text">$</span> <span className="text-code">./token-gate --check --wallet {publicKey?.toString().slice(0, 8)}...</span>
+                      </div>
+                      <div className="matrix-text text-sm">[SUCCESS] Access granted!</div>
+                      <div className="terminal-text text-sm">
+                        Balance: <span className="cyber-text">{formatTokenAmount(tokenBalance || 0)} $SOLUTION</span>
+                      </div>
+                      <div className="terminal-text text-sm">Status: <span className="matrix-text">READY_FOR_ANALYSIS</span></div>
+                      <div className="hacker-text text-xs">[TEST_MODE] Token gating temporarily bypassed for testing</div>
+                    </div>
           ) : (
             <div className="space-y-2">
               <div className="terminal-text">
