@@ -6,6 +6,7 @@ import { LoreCard } from '@/components/LoreCard'
 import { UploadBar } from '@/components/UploadBar'
 import { ResultCard } from '@/components/ResultCard'
 import { MatrixBorders } from '@/components/MatrixBorders'
+import { TokenInfo } from '@/components/TokenInfo'
 
 interface AnalysisResult {
   signal: 'BUY' | 'SELL'
@@ -84,6 +85,9 @@ export default function Home() {
               <div className="terminal-dot bg-green-500"></div>
               <span className="terminal-text ml-4">SOLution.exe - Oracle Terminal v2.0</span>
               <div className="ml-auto flex items-center space-x-4">
+                <div className="terminal-text text-xs hidden sm:block">
+                  <span className="cyber-text">CA:</span> <span className="matrix-text">TO_BE_ADDED</span>
+                </div>
                 <a
                   href="https://x.com/SOLution_tool"
                   target="_blank"
@@ -107,6 +111,9 @@ export default function Home() {
         <div className="space-y-8">
           {/* Lore Card */}
           <LoreCard />
+
+          {/* Token Information */}
+          <TokenInfo />
 
           {/* Upload Section */}
           <UploadBar onAnalyze={handleAnalyze} isAnalyzing={isAnalyzing} />

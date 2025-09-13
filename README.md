@@ -2,6 +2,16 @@
 
 A Next.js 14 dApp that analyzes trading charts using AI and provides BUY/SELL signals.
 
+## 🪙 Token Information
+
+**Contract Address (CA):** `TO_BE_ADDED`  
+**Symbol:** $SOLUTION  
+**Decimals:** 6  
+**Required for Access:** 1,000,000 $SOLUTION  
+**Network:** Solana Mainnet  
+
+> **Note:** Token gating is active. Users need to hold 1M+ $SOLUTION tokens to access the AI analysis features.
+
 ## Features
 
 - 🔗 **Wallet Connection**: Connect with Phantom wallet
@@ -9,6 +19,7 @@ A Next.js 14 dApp that analyzes trading charts using AI and provides BUY/SELL si
 - 🎨 **Terminal UI**: Matrix/Hacker themed interface
 - ⚡ **Solana Integration**: Built on Solana blockchain
 - 🤖 **Groq AI**: Powered by Groq's vision models
+- 🪙 **Token Gating**: Exclusive access for $SOLUTION holders
 
 ## Tech Stack
 
