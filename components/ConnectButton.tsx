@@ -18,6 +18,9 @@ export function ConnectButton() {
     )
   }
 
+  // Error boundary for wallet operations
+  try {
+
   if (!connected || !publicKey) {
     return (
       <div className="flex flex-col items-end space-y-1 sm:space-y-2">
@@ -51,4 +54,12 @@ export function ConnectButton() {
       </button>
     </div>
   )
+  } catch (error) {
+    console.error('Wallet connection error:', error)
+    return (
+      <div className="terminal-button h-10 w-48 text-red-400">
+        [ERROR] Wallet Error
+      </div>
+    )
+  }
 }

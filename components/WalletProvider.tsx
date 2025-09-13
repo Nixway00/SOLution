@@ -5,8 +5,7 @@ import { ConnectionProvider, WalletProvider as SolanaWalletProvider } from '@sol
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets'
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
 
-// Default styles that can be overridden by your app
-require('@solana/wallet-adapter-react-ui/styles.css')
+// Custom styles are handled in globals.css
 
 interface WalletProviderProps {
   children: ReactNode
