@@ -25,10 +25,10 @@ export function UploadBar({ onAnalyze, isAnalyzing }: UploadBarProps) {
 
     setIsCheckingBalance(true)
     try {
-      // TEMPORARY: Bypass token gating for testing
+      // Check if token address is configured
       if (config.solana.solutionTokenAddress === 'TO_BE_ADDED') {
-        setTokenBalance(1000000) // Simulate having enough tokens
-        setHasAccess(true)
+        setTokenBalance(0)
+        setHasAccess(false)
         setIsCheckingBalance(false)
         return
       }
@@ -39,9 +39,8 @@ export function UploadBar({ onAnalyze, isAnalyzing }: UploadBarProps) {
       setHasAccess(balance.hasAccess)
     } catch (error) {
       console.error('Error checking token balance:', error)
-      // In case of error, still allow access for testing
-      setTokenBalance(1000000)
-      setHasAccess(true)
+      setTokenBalance(0)
+      setHasAccess(false)
     } finally {
       setIsCheckingBalance(false)
     }
@@ -113,6 +112,15 @@ export function UploadBar({ onAnalyze, isAnalyzing }: UploadBarProps) {
                 Loading blockchain data...
               </div>
             </div>
+          ) : config.solana.solutionTokenAddress === 'TO_BE_ADDED' ? (
+            <div className="space-y-2">
+              <div className="terminal-text">
+                <span className="cyber-text">$</span> <span className="text-code">./token-gate --check --wallet {publicKey?.toString().slice(0, 8)}...</span>
+              </div>
+              <div className="hacker-text text-sm">[CONFIG_ERROR] Token not configured</div>
+              <div className="terminal-text text-sm">SOLUTION token address not set. Please contact administrator.</div>
+              <div className="terminal-text text-sm">Status: <span className="glitch-text">WAITING_FOR_CONFIG</span></div>
+            </div>
           ) : hasAccess ? (
             <div className="space-y-2">
               <div className="terminal-text">
@@ -121,9 +129,6 @@ export function UploadBar({ onAnalyze, isAnalyzing }: UploadBarProps) {
               <div className="matrix-text text-sm">[SUCCESS] Access granted!</div>
               <div className="terminal-text text-sm">
                 Balance: <span className="cyber-text">{formatTokenAmount(tokenBalance || 0)} $SOLUTION</span>
-                {config.solana.solutionTokenAddress === 'TO_BE_ADDED' && (
-                  <span className="hacker-text ml-2">[DEMO_MODE]</span>
-                )}
               </div>
               <div className="terminal-text text-sm">Status: <span className="matrix-text">READY_FOR_ANALYSIS</span></div>
             </div>
