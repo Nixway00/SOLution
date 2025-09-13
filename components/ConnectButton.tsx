@@ -1,12 +1,12 @@
 'use client'
 
 import { useWallet } from '@solana/wallet-adapter-react'
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 import { useEffect, useState } from 'react'
 
 export function ConnectButton() {
-  const { publicKey, connected, disconnect } = useWallet()
+  const { publicKey, connected, disconnect, connect, select, wallet } = useWallet()
   const [mounted, setMounted] = useState(false)
+  const [isConnecting, setIsConnecting] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -18,13 +18,58 @@ export function ConnectButton() {
     )
   }
 
-  // Error boundary for wallet operations
-  try {
+  const handleConnect = async () => {
+    if (!wallet) {
+      // If no wallet is selected, try to connect with Phantom directly
+      try {
+        setIsConnecting(true)
+        // Try to connect with Phantom if available
+        if (typeof window !== 'undefined' && (window as any).solana?.isPhantom) {
+          const phantom = (window as any).solana
+          const response = await phantom.connect()
+          console.log('Connected to Phantom:', response.publicKey.toString())
+        } else {
+          alert('Please install Phantom wallet from https://phantom.app')
+        }
+      } catch (error) {
+        console.error('Connection error:', error)
+        alert('Failed to connect wallet. Please try again.')
+      } finally {
+        setIsConnecting(false)
+      }
+    } else {
+      try {
+        setIsConnecting(true)
+        await connect()
+      } catch (error) {
+        console.error('Connection error:', error)
+        alert('Failed to connect wallet. Please try again.')
+      } finally {
+        setIsConnecting(false)
+      }
+    }
+  }
 
   if (!connected || !publicKey) {
     return (
       <div className="flex flex-col items-end space-y-1 sm:space-y-2">
-        <WalletMultiButton />
+        <button
+          onClick={handleConnect}
+          disabled={isConnecting}
+          className="terminal-button h-10 w-48 flex items-center justify-center space-x-2 disabled:opacity-50"
+        >
+          {isConnecting ? (
+            <>
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-terminal"></div>
+              <span className="cyber-text">[CONNECTING]</span>
+            </>
+          ) : (
+            <>
+              <span className="cyber-text">[CONNECT]</span>
+              <span>Connect Wallet</span>
+            </>
+          )}
+        </button>
         <div className="terminal-text text-xs text-right hidden sm:block">
           <span className="cyber-text">[INFO]</span> Click to connect your wallet
         </div>
@@ -54,12 +99,4 @@ export function ConnectButton() {
       </button>
     </div>
   )
-  } catch (error) {
-    console.error('Wallet connection error:', error)
-    return (
-      <div className="terminal-button h-10 w-48 text-red-400">
-        [ERROR] Wallet Error
-      </div>
-    )
-  }
 }

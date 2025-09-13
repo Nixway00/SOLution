@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, ReactNode, useMemo } from 'react'
+import { FC, ReactNode, useMemo, useEffect } from 'react'
 import { ConnectionProvider, WalletProvider as SolanaWalletProvider } from '@solana/wallet-adapter-react'
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets'
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
@@ -21,6 +21,14 @@ export const WalletProvider: FC<WalletProviderProps> = ({ children }) => {
     ],
     []
   )
+
+  // Auto-select Phantom if available
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).solana?.isPhantom) {
+      // Phantom is available, we can connect directly
+      console.log('Phantom wallet detected')
+    }
+  }, [])
 
   return (
     <ConnectionProvider endpoint={endpoint}>
