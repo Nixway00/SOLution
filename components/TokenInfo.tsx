@@ -77,6 +77,16 @@ export function TokenInfo() {
                     [DEXSCREENER] View on DexScreener
                   </a>
                 </div>
+                <div>
+                  <a 
+                    href={`https://pump.fun/${tokenAddress}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="matrix-text hover:cyber-text transition-colors"
+                  >
+                    [PUMP.FUN] Trade on Pump.fun
+                  </a>
+                </div>
               </div>
             </div>
           )}
