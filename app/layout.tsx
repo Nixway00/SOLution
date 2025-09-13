@@ -8,6 +8,10 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'SOLution - Trading Oracle',
   description: 'The oracle that filters the noise and lights the path in chaotic markets.',
+  keywords: ['crypto', 'trading', 'oracle', 'solana', 'ai', 'analysis', 'mobile'],
+  authors: [{ name: 'SOLution Team' }],
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
+  themeColor: '#000000',
   icons: {
     icon: [
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
@@ -17,6 +21,19 @@ export const metadata: Metadata = {
     other: [
       { rel: 'icon', url: '/favicon.ico' },
     ],
+  },
+  openGraph: {
+    title: 'SOLution - Trading Oracle',
+    description: 'The oracle that filters the noise and lights the path in chaotic markets.',
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'SOLution',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'SOLution - Trading Oracle',
+    description: 'The oracle that filters the noise and lights the path in chaotic markets.',
+    creator: '@SOLution_tool',
   },
 }
 
