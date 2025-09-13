@@ -87,7 +87,7 @@ export default function Home() {
               <span className="terminal-text ml-2 sm:ml-4 text-xs sm:text-sm">SOLution.exe - Oracle Terminal v2.0</span>
               <div className="ml-auto flex items-center space-x-1 sm:space-x-4">
                 <div className="terminal-text text-xs hidden lg:block">
-                  <span className="cyber-text">CA:</span> <span className="matrix-text">TO_BE_ADDED</span>
+                  <span className="cyber-text">CA:</span> <span className="matrix-text">2oCoUJrmGLPUtEz247VEHX93NB8LQmNVLE5d2Vkopump</span>
                 </div>
                 <a
                   href="https://github.com/Nixway00/SOLution"

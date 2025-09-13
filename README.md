@@ -4,7 +4,7 @@ A Next.js 14 dApp that analyzes trading charts using AI and provides BUY/SELL si
 
 ## 🪙 Token Information
 
-**Contract Address (CA):** `TO_BE_ADDED`  
+**Contract Address (CA):** `2oCoUJrmGLPUtEz247VEHX93NB8LQmNVLE5d2Vkopump`  
 **Symbol:** $SOLUTION  
 **Decimals:** 6  
 **Required for Access:** 1,000,000 $SOLUTION  
